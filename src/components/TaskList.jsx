@@ -1,4 +1,5 @@
 import { useSelector, useDispatch } from "react-redux";
+import { Link } from "react-router-dom";
 import { removeTask } from "../features/tasks/taskSlice";
 
 function TaskList() {
@@ -15,7 +16,12 @@ function TaskList() {
 
   return (
     <>
-      <h1>Task List</h1>
+      <h1>Task List ({tasks.length})</h1>
+      <br />
+      <Link to="/create">New Task</Link>
+      <br />
+      <br />
+      <br />
       <table style={{ borderCollapse: "collapse", width: "100%" }}>
         <thead>
           <tr>
