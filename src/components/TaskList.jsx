@@ -15,36 +15,45 @@ function TaskList() {
   };
 
   return (
-    <>
-      <h1>Task List ({tasks.length})</h1>
+    <div className="w-4/6">
       <br />
-      <Link to="/create">New Task</Link>
+      <header className="flex justify-between items-center py-4">
+        <h1>Task List ({tasks.length})</h1>
+        <br />
+        <Link
+          to="/create"
+          className="bg-indigo-600 px-2 py-1 rounded-sm text-white hover:bg-indigo-700"
+        >
+          New Task
+        </Link>
+      </header>
       <br />
       <br />
-      <br />
-      <table style={{ borderCollapse: "collapse", width: "100%" }}>
-        <thead>
-          <tr>
-            <th>Title</th>
-            <th>Description</th>
-            <th>Action</th>
-          </tr>
-        </thead>
-        <tbody>
-          {tasks.map((task) => (
-            <tr key={task.id}>
-              <td>{task.title}</td>
-              <td>{task.description}</td>
-              <td>
-                <button onClick={() => handleClick(task.id)}>Remove</button>
-                <span> | </span>
-                <Link to={`/edit/${task.id}`}>Edit</Link>
-              </td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
-    </>
+      <div className="grid grid-cols-3 py-2 gap-6">
+        {tasks.map((task) => (
+          <div key={task.id} className="bg-white p-4 rounded-md shadow-md">
+            <header className="flex justify-between">
+              <h3>{task.title}</h3>
+              <div className="flex items-center py-1 gap-x-2">
+                <Link
+                  to={`/edit/${task.id}`}
+                  className="bg-indigo-600 px-2 py-1 rounded-md text-xs text-white"
+                >
+                  Edit
+                </Link>
+                <button
+                  onClick={() => handleClick(task.id)}
+                  className="bg-red-600 px-2 py-1 rounded-md text-xs text-white"
+                >
+                  Remove
+                </button>
+              </div>
+            </header>
+            <p>{task.description}</p>
+          </div>
+        ))}
+      </div>
+    </div>
   );
 }
 

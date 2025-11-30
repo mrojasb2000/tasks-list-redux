@@ -43,35 +43,43 @@ function TaskForm() {
   }, [params.id, tasks]);
 
   return (
-    <>
-      <h1>Task Form</h1>
-      <form onSubmit={handleSubmit}>
-        <label>
-          Task Name:
-          <input
-            type="text"
-            name="title"
-            placeholder="Enter task name"
-            value={task.title}
-            onChange={handleChange}
-          />
-        </label>
+    <div className="bg-white rounded-md w-4/6">
+      <br />
+      <form
+        onSubmit={handleSubmit}
+        className="bg-white p-4 rounded-md max-w-sm"
+      >
+        <label className="block text-sm font-bold py-2">Task Name:</label>
+        <input
+          type="text"
+          name="title"
+          placeholder="Enter task name"
+          value={task.title}
+          onChange={handleChange}
+          className="w-full p-2 rounded-md bg-zinc-600 mb-2 text-white"
+        />
         <br />
         <br />
-        <label>
+        <label className="block text-sm font-bold py-2">
           Task Description:
-          <textarea
-            name="description"
-            placeholder="Enter task description"
-            value={task.description}
-            onChange={handleChange}
-          />
         </label>
+        <textarea
+          name="description"
+          placeholder="Enter task description"
+          value={task.description}
+          onChange={handleChange}
+          className="w-full p-2 rounded-md bg-zinc-600 mb-2 text-white"
+        />
         <br />
         <br />
-        <button type="submit">Save</button>
+        <button
+          type="submit"
+          className="bg-indigo-600 px-2 py-1 rounded-md text-xs text-white"
+        >
+          Save
+        </button>
       </form>
-    </>
+    </div>
   );
 }
 
