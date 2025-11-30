@@ -69,7 +69,7 @@ function TaskForm() {
         </label>
         <br />
         <br />
-        <button type="submit">Add Task</button>
+        <button type="submit">Save</button>
       </form>
     </>
   );
