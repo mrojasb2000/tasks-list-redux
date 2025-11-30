@@ -11,6 +11,7 @@ function App() {
         <Routes>
           <Route path="/" element={<TaskList />} />
           <Route path="/create" element={<TaskForm />} />
+          <Route path="/edit/:id" element={<TaskForm />} />
         </Routes>
       </BrowserRouter>
     </>

@@ -1,13 +1,15 @@
-import { useState } from "react";
-import { useDispatch } from "react-redux";
-import { useNavigate } from "react-router-dom";
-import { addTask } from "../features/tasks/taskSlice";
+import { useState, useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { useNavigate, useParams } from "react-router-dom";
+import { addTask, updateTask } from "../features/tasks/taskSlice";
 import { v4 as uuid } from "uuid";
 
 function TaskForm() {
   // Dispatch event from
+  const tasks = useSelector((state) => state.tasks);
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const params = useParams();
 
   const [task, setTask] = useState({
     title: "",
@@ -21,11 +23,24 @@ function TaskForm() {
 
   const handleSubmit = (e) => {
     e.preventDefault(); //No refresh page
-    // Add task logic here
-    //console.log(task);
-    dispatch(addTask({ id: uuid(), ...task }));
+    if (params.id) {
+      // Update task logic here
+      dispatch(updateTask({ id: params.id, ...task }));
+    } else {
+      // Add task logic here
+      dispatch(addTask({ id: uuid(), ...task }));
+    }
     navigate("/");
   };
+
+  // Fetch task data from API or Redux store
+  // Bootstrap component
+  useEffect(() => {
+    if (params.id) {
+      // eslint-disable-next-line react-hooks/set-state-in-effect
+      setTask(tasks.find((task) => task.id === params.id));
+    }
+  }, [params.id, tasks]);
 
   return (
     <>
@@ -37,6 +52,7 @@ function TaskForm() {
             type="text"
             name="title"
             placeholder="Enter task name"
+            value={task.title}
             onChange={handleChange}
           />
         </label>
@@ -47,6 +63,7 @@ function TaskForm() {
           <textarea
             name="description"
             placeholder="Enter task description"
+            value={task.description}
             onChange={handleChange}
           />
         </label>

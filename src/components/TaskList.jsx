@@ -37,6 +37,8 @@ function TaskList() {
               <td>{task.description}</td>
               <td>
                 <button onClick={() => handleClick(task.id)}>Remove</button>
+                <span> | </span>
+                <Link to={`/edit/${task.id}`}>Edit</Link>
               </td>
             </tr>
           ))}
